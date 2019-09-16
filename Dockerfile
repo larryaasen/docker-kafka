@@ -1,12 +1,6 @@
 # Builds an image for Apache Kafka from binary distribution.
-#
-# The netflixoss/java base image runs Oracle Java 8 installed atop the
-# ubuntu:trusty (14.04) official image. Docker's official java images are
-# OpenJDK-only currently, and the Kafka project, Confluent, and most other
-# major Java projects test and recommend Oracle Java for production for optimal
-# performance.
 
-FROM netflixoss/java:8
+FROM openjdk:8-jre-slim
 MAINTAINER Rob McCready <rmccready@gmail.com>
 
 # The Scala 2.12 build is currently recommended by the project.
@@ -27,10 +21,11 @@ ADD https://dist.apache.org/repos/dist/release/kafka/${KAFKA_VERSION}/${KAFKA_RE
 
 WORKDIR /tmp
 
+# REMOVED: gpg not installed in openjdk:8-jre-slim image
 # Check artifact digest integrity
-RUN echo VERIFY CHECKSUM: && \
-  gpg --print-md MD5 ${KAFKA_RELEASE_ARCHIVE} 2>/dev/null && \
-  cat ${KAFKA_RELEASE_ARCHIVE}.md5
+#RUN echo VERIFY CHECKSUM: && \
+#  gpg --print-md MD5 ${KAFKA_RELEASE_ARCHIVE} 2>/dev/null && \
+#  cat ${KAFKA_RELEASE_ARCHIVE}.md5
 
 # Install Kafka to /kafka
 RUN tar -zx -C /kafka --strip-components=1 -f ${KAFKA_RELEASE_ARCHIVE} && \
