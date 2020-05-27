@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+## 2.5.0 - May 26, 2020
+
+- Updated Kafka to version 2.5.0
+
 ## latest - running releases of `latest` tag
 
 No changes yet.
