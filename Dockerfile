@@ -1,10 +1,10 @@
 # Builds an image for Apache Kafka from binary distribution.
 
 FROM openjdk:8-jre-slim
-MAINTAINER Rob McCready <rmccready@gmail.com>
+MAINTAINER Larry Aasen <larryaasen@gmail.com>
 
 # The Scala 2.12 build is currently recommended by the project.
-ENV KAFKA_VERSION=2.3.0
+ENV KAFKA_VERSION=2.5.0
 ENV KAFKA_SCALA_VERSION=2.12
 ENV JMX_PORT=7203
 ENV KAFKA_RELEASE_ARCHIVE kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz
@@ -47,4 +47,3 @@ EXPOSE 9092 ${JMX_PORT}
 VOLUME [ "/data", "/logs" ]
 
 CMD ["/start.sh"]
-
